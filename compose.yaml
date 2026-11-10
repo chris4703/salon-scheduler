@@ -1,0 +1,38 @@
+name: salon-scheduler-demo
+
+services:
+  salon:
+    build: .
+    image: ${SALON_IMAGE:-salon-scheduler-demo:local}
+    restart: unless-stopped
+    init: true
+    ports:
+      - "${SALON_BIND_ADDRESS:-127.0.0.1}:${SALON_PORT:-18093}:8000"
+    environment:
+      APP_REVISION: ${APP_REVISION:-development}
+      SALON_TIMEZONE: ${SALON_TIMEZONE:-Etc/UTC}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_FROM: ${SMTP_FROM:-}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+    volumes:
+      - salon-data:/app/data
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+
+  website:
+    profiles: [website]
+    build: ./Website
+    image: ${WEBSITE_IMAGE:-salon-scheduler-demo-website:local}
+    restart: unless-stopped
+    ports:
+      - "${WEBSITE_BIND_ADDRESS:-127.0.0.1}:${WEBSITE_PORT:-18094}:8080"
+
+volumes:
+  salon-data:

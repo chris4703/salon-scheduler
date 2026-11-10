@@ -1,0 +1,15 @@
+.git
+.codex
+.agents
+.env
+.env.*
+!.env.example
+data
+__pycache__
+*.pyc
+.DS_Store
+tests
+
+.deploy/
+
+Website/

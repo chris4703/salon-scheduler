@@ -1,0 +1,26 @@
+__pycache__/
+*.pyc
+data/
+.env
+.DS_Store
+backups/
+.env.*
+!.env.example
+
+.deploy/
+
+# Private runtime files, exports, credentials, and keys
+*.db
+*.sqlite
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
+*.log
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+credentials/
+exports/
+logs/

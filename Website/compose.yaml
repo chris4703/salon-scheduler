@@ -1,0 +1,8 @@
+name: salon-scheduler-demo-website
+
+services:
+  website:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "${WEBSITE_BIND_ADDRESS:-127.0.0.1}:${WEBSITE_PORT:-18094}:8080"
